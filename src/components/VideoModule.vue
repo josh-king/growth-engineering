@@ -1,6 +1,6 @@
 <template>
     <div class="column">
-        <div class="card">
+        <div class="card video-view">
             <div class="card-image">
                 <div class="video-container">
                     <iframe width="100%" height="460" frameborder="0" :src="url" allowfullscreen></iframe>
@@ -15,7 +15,7 @@
                     </div>
                     <div class="media-content">
                         <p class="title is-4">{{videoObject.snippet.title}}</p>
-                        <p class="subtitle is-6"><a :href="channel">@{{videoObject.snippet.channelTitle}}</a></p>
+                        <p class="subtitle is-6"><a :href="channel">@{{videoObject.snippet.channelTitle}}</a> - {{date(videoObject.snippet.publishedAt)}}</p>
                     </div>
                 </div>
                     
@@ -48,6 +48,12 @@ export default {
   },
   components: {
       VideoProperties
+  },
+  methods: {
+      date: function (date) {
+          // eslint-disable-next-line 
+          return moment(date).format('Do MMMM YYYY, h:mm a');
+      }
   }
 }
 </script>
@@ -55,5 +61,9 @@ export default {
 <style scope>
 .video-properties {
     color: grey;
+}
+
+.video-view {
+    max-width: 800px;
 }
 </style>

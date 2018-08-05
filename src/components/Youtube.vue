@@ -1,21 +1,43 @@
 <template>
-  <div class="container">
-    <section v-if="errored">
-      <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
-    </section>
-    <section v-else>
-      <div v-if="loading">Loading...</div>
-      <div v-else>
-        <div class="columns is-desktop is-multiline is-centered">
-          <div v-for="item in items" :key="item.id">
-            <VideoModule :channelIcon="icon"
-                         :videoObject="item">
-            </VideoModule>
-          </div>  
-        </div> 
-      </div>
-    </section>
-  </div>
+  <section v-if="errored">
+    <section class="hero is-danger is-fullheight">
+        <div class="hero-body">
+          <div class="container has-text-centered">
+            <h1 class="title">
+              Whoops!
+            </h1>
+            <h2 class="subtitle">
+              We're sorry, we're not able to retrieve this information at the moment, please try back later
+            </h2>
+          </div>
+        </div>
+      </section>
+  </section>
+  <section v-else>
+    <div v-if="loading">
+      <section class="hero is-link is-fullheight">
+        <div class="hero-body">
+          <div class="container has-text-centered">
+            <h1 class="title">
+              Loading..
+            </h1>
+            <h2 class="subtitle">
+              (this should only take a second)
+            </h2>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div v-else>
+      <div class="columns is-desktop is-multiline is-centered">
+        <div v-for="item in items" :key="item.id">
+          <VideoModule :channelIcon="icon"
+                        :videoObject="item">
+          </VideoModule>
+        </div>  
+      </div> 
+    </div>
+  </section>
 </template>
 
 <script>
@@ -55,8 +77,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>

@@ -1,16 +1,21 @@
 <template>
   <div id="app">
-    <Youtube msg="Welcome to Your Vue.js App"/>
+    <div class="container is-fluid">
+      <Navigation/>
+      <Youtube/>
+    </div>
   </div>
 </template>
 
 <script>
 import Youtube from './components/Youtube.vue'
+import Navigation from './components/Navigation.vue'
 
 export default {
   name: 'app',
   components: {
-    Youtube
+    Youtube,
+    Navigation
   }
 }
 </script>
