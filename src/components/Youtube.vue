@@ -7,13 +7,9 @@
       <div v-if="loading">Loading...</div>
       <div v-else>
         <div class="columns is-desktop is-multiline is-centered">
-          <div v-for="items in info" :key="items.id">
-            <VideoModule :title="items.snippet.title" 
-                         :url="items.snippet.resourceId.videoId" 
-                         :channelTitle="items.snippet.channelTitle" 
-                         :channelIcon="icon"
-                         :channelId="items.snippet.channelId"
-                         :description="items.snippet.description">
+          <div v-for="item in items" :key="item.id">
+            <VideoModule :channelIcon="icon"
+                         :videoObject="item">
             </VideoModule>
           </div>  
         </div> 
@@ -34,7 +30,7 @@ export default {
   name: 'Youtube',
   data () {
     return {
-      info: [],
+      items: [],
       loading: true,
       errored: false,
       title: '',
@@ -45,7 +41,7 @@ export default {
     axios
       .get('https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails%2Cstatus&maxResults=5&playlistId=UUTI5S0PqpgB0DbYgcgRU6QQ&key=AIzaSyAZxPEU74h725HWmOiXNFRiujQKlzP6dmI')
       .then(response => {
-        this.info = response.data.items
+        this.items = response.data.items
       })
       .catch(error => {
         // eslint-disable-next-line

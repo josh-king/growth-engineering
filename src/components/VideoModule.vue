@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-image">
                 <div class="video-container">
-                    <iframe width="100%" height="460" frameborder="0" :src="newURL" allowfullscreen></iframe>
+                    <iframe width="100%" height="460" frameborder="0" :src="url" allowfullscreen></iframe>
                 </div>
             </div>
             <div class="card-content">
@@ -14,14 +14,13 @@
                         </figure>
                     </div>
                     <div class="media-content">
-                        <p class="title is-4">{{title}}</p>
-                        <p class="subtitle is-6"><a :href="channel">@{{channelTitle}}</a></p>
+                        <p class="title is-4">{{videoObject.snippet.title}}</p>
+                        <p class="subtitle is-6"><a :href="channel">@{{videoObject.snippet.channelTitle}}</a></p>
                     </div>
                 </div>
                     
                 <div class="content">
-                    {{description}}
-
+                    {{videoObject.snippet.description}}
                     <div class="video-properties">
                         <VideoProperties :privacy="videoPrivacy"></VideoProperties>
                     </div>                       
@@ -37,18 +36,14 @@ import VideoProperties from './VideoProperties'
 export default {
   name: 'VideoModule',
   props: {
-    title: String,
-    url: String,
-    channelTitle: String,
     channelIcon: String,
-    channelId: String,
-    description: String
+    videoObject: Object
   },
   data () {
     return {
-        newURL: "https://www.youtube.com/embed/" + this.url,
-        channel: "https://www.youtube.com/channel/" + this.channelId,
-        videoPrivacy: "public"
+        url: "https://www.youtube.com/embed/" + this.videoObject.snippet.resourceId.videoId,
+        channel: "https://www.youtube.com/channel/" + this.videoObject.snippet.channelId,
+        videoPrivacy: this.videoObject.status.privacyStatus
     }
   },
   components: {
